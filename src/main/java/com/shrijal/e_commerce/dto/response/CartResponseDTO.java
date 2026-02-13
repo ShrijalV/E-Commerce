@@ -1,0 +1,40 @@
+package com.shrijal.e_commerce.dto.response;
+
+
+import java.util.List;
+
+/**
+ * Data Transfer Object for Cart responses
+ * Contains cart items and total amount
+ */
+public class CartResponseDTO {
+
+    private Long cartId;
+    private List<CartItemResponseDTO> items;
+    private Double totalAmount;
+
+    // Getters and Setters
+    public Long getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(Long cartId) {
+        this.cartId = cartId;
+    }
+
+    public List<CartItemResponseDTO> getItems() {
+        return items;
+    }
+
+    public void setItems(List<CartItemResponseDTO> items) {
+        this.items = items;
+    }
+
+    public Double getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(Double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+}
