@@ -50,13 +50,15 @@
 
 1. User Registration 
 - Users are registered using the /api/users/register
-- Response: {
+- Response: 
+- {
   "email": "shriiV@example.com",
   "id": 5,
   "name": "Shrii Verma"
   }
 - We can get all the users by /api/users endpoint
-- Response: [
+- Response:
+- [
   {
   "email": "max@example.com",
   "id": 3,
@@ -74,10 +76,12 @@
   }
   ]
 
+
 2. Cart
 - Each user has one cart created automatically upon registration
 - cartItems can be added to cart using /api/cart/add
-- Response:{
+- Response:
+- {
   "cartId": 4,
   "items": [
   {
@@ -94,9 +98,11 @@
 - Cart items store the price at the time of addition
 - Supports adding, viewing, and removing items
 
+
 3. Order Placement
 - Orders are created from cart using user id
-- Response:{
+- Response:
+- {
   "orderId": 3,
   "totalAmount": 42499.0,
   "convertedAmount": 469.03,
@@ -121,6 +127,7 @@
   }
 - Cart is automatically cleared after successful order placement
 
+
 4. Currency Conversion
 - Uses Frankfurter API (https://www.frankfurter.app/)
 - Converts INR to any supported currency like USD, EUR
@@ -133,12 +140,14 @@
 - Includes error handling for invalid currencies
 - Stores both original (INR) and converted amounts
 
+
 5. The application includes error handling for:
 - Invalid user/product/category IDs
 - Empty cart during checkout
 - Currency conversion failures
 - Duplicate email registration
 - Invalid input validation
+
 
 6. Swagger
 - Using swagger(http://localhost:8080/swagger-ui/index.html) for testing API
