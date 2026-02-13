@@ -4,28 +4,25 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * User entity representing a customer in the e-commerce system
- * Maps to 'users' table in the database
- */
+
 @Entity
 @Table(name = "users")
 public class User {
 
-    // Primary key with auto-increment strategy
+    // Primary key with auto-increment
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // User's full name (required)
+    // User name
     @Column(nullable = false)
     private String name;
 
-    // User's email address (required and unique)
+    // User's email address
     @Column(nullable = false, unique = true)
     private String email;
 
-    // User's password (required, should be encrypted in production)
+    // User's password
     @Column(nullable = false)
     private String password;
 
@@ -43,10 +40,7 @@ public class User {
     @JsonManagedReference
     private List<Order> orders;
 
-    /**
-     * JPA lifecycle callback - executed before persisting entity
-     * Sets the creation timestamp
-     */
+    //sets the creation time
     @PrePersist
     public void prePersist() {
         this.createdAt = LocalDateTime.now();

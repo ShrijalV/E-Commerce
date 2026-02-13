@@ -1,8 +1,6 @@
 package com.shrijal.e_commerce.dto.response;
 
-/**
- * Data Transfer Object for Category responses
- */
+
 public class CategoryResponseDTO {
 
     private Long id;

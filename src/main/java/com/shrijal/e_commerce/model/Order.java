@@ -5,10 +5,7 @@ import jakarta.validation.constraints.Positive;
 import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * Order entity representing a completed purchase
- * Maps to 'orders' table in the database
- */
+
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -49,9 +46,7 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
 
-    /**
-     * JPA lifecycle callback - sets order date and default status before persisting
-     */
+    //sets date and default status
     @PrePersist
     public void prePersist() {
         this.orderDate = LocalDateTime.now();

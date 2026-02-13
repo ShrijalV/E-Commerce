@@ -1,9 +1,6 @@
 package com.shrijal.e_commerce.dto.response;
 
-/**
- * Data Transfer Object for User responses
- * Excludes sensitive information like password
- */
+
 public class UserResponseDTO {
 
     private Long id;

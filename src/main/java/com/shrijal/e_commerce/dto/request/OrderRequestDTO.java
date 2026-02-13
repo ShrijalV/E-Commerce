@@ -2,10 +2,6 @@ package com.shrijal.e_commerce.dto.request;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-/**
- * Data Transfer Object for placing orders
- * Includes currency for Frankfurter API conversion
- */
 public class OrderRequestDTO {
 
     @NotNull(message = "User id is required")

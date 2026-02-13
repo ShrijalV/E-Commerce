@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Service layer for Product operations
- * Handles business logic for product management
- */
+
 @Service
 public class ProductService {
 
@@ -23,15 +20,11 @@ public class ProductService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    /**
-     * Create a new product
-     * @param dto - product data
-     * @return ProductResponseDTO with created product details
-     * @throws RuntimeException if category not found
-     */
+    //create new product
+    //Throw exception if category not found
     @Transactional
     public ProductResponseDTO createProduct(ProductRequestDTO dto) {
-        // Verify category exists
+        // Verify if category exists
         Category category = categoryRepository.findById(dto.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found with id: " + dto.getCategoryId()));
 
@@ -46,7 +39,6 @@ public class ProductService {
         // Save product
         Product saved = productRepository.save(product);
 
-        // Convert to response DTO
         ProductResponseDTO response = new ProductResponseDTO();
         response.setId(saved.getId());
         response.setName(saved.getName());
@@ -58,12 +50,10 @@ public class ProductService {
         return response;
     }
 
-    /**
-     * Get product by ID
-     * @param id - product ID
-     * @return ProductResponseDTO
-     * @throws RuntimeException if product not found
-     */
+
+     //get the product
+    //throws Exception if product not found
+
     public ProductResponseDTO getProduct(Long id) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
@@ -80,11 +70,9 @@ public class ProductService {
         return dto;
     }
 
-    /**
-     * Update product stock quantity
-     * @param productId - product ID
-     * @param newStock - new stock quantity
-     */
+
+     //Update product stock quantity
+
     @Transactional
     public void updateStock(Long productId, Integer newStock) {
         Product product = productRepository.findById(productId)

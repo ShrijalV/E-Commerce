@@ -1,9 +1,6 @@
 package com.shrijal.e_commerce.dto.response;
 
 
-/**
- * Data Transfer Object for individual cart items in responses
- */
 public class CartItemResponseDTO {
 
     private Long id;

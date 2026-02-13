@@ -22,12 +22,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    /**
-     * Register a new user
-     * Also creates an empty cart for the user
-     * @param dto - user registration data
-     * @return UserResponseDTO with created user details
-     */
+    //Register a new user and also creates an empty cart for the user
+
     @Transactional
     public UserResponseDTO register(UserRequestDTO dto) {
         // Check if email already exists
@@ -46,10 +42,9 @@ public class UserService {
         cart.setUser(user);
         user.setCart(cart);
 
-        // Save user (cart will be saved due to cascade)
+        // Save user
         User saved = userRepository.save(user);
 
-        // Convert to response DTO
         UserResponseDTO response = new UserResponseDTO();
         response.setId(saved.getId());
         response.setName(saved.getName());

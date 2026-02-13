@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Positive;
 
-/**
- * Product entity representing items available for purchase
- * Maps to 'product' table in the database
- */
+
 @Entity
 public class Product {
 

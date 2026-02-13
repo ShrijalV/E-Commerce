@@ -3,10 +3,7 @@ package com.shrijal.e_commerce.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
-/**
- * CartItem entity representing individual items in a shopping cart
- * Maps to 'cart_item' table in the database
- */
+
 @Entity
 public class CartItem {
 

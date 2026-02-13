@@ -19,11 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Service layer for Order operations
- * Handles business logic for order placement and currency conversion
- * Uses Frankfurter API for real-time currency conversion
- */
 @Service
 public class OrderService {
 
@@ -36,16 +31,12 @@ public class OrderService {
     @Autowired
     private RestTemplate restTemplate;
 
-    /**
-     * Place an order from user's cart
-     * Converts total amount from INR to target currency using Frankfurter API
-     * @param dto - order request with user ID and target currency
-     * @return OrderResponseDTO with order details and converted amount
-     * @throws RuntimeException if cart not found or empty
-     */
+    //Place an order from user's cart and Converts
+    // total amount from INR to target currency using Frankfurter API
+    //Throws Exception if cart not found or empty
     @Transactional
     public OrderResponseDTO place(OrderRequestDTO dto) {
-        // Step 1: Fetch user's cart
+        //Fetch user's cart
         Cart cart = cartRepository.findByUserId(dto.getUserId())
                 .orElseThrow(() -> new RuntimeException("Cart not found for user id: " + dto.getUserId()));
 
@@ -54,7 +45,7 @@ public class OrderService {
             throw new RuntimeException("Cannot place order: Cart is empty");
         }
 
-        // Step 2: Calculate total amount in INR (base currency)
+        //Calculate total amount in INR (base currency)
         double totalInr = 0;
         List<OrderItem> orderItems = new ArrayList<>();
 
@@ -69,7 +60,7 @@ public class OrderService {
             orderItems.add(orderItem);
         }
 
-        // Step 3: Currency conversion using Frankfurter API
+        //Currency conversion using Frankfurter API
         Double convertedAmount = null;
         try {
             // Frankfurter API endpoint
@@ -79,7 +70,7 @@ public class OrderService {
                     dto.getCurrency().toUpperCase()
             );
 
-            // Make API call
+            // Make external API call
             Map<String, Object> response = restTemplate.getForObject(url, Map.class);
 
             if (response != null && response.containsKey("rates")) {
@@ -95,7 +86,7 @@ public class OrderService {
             throw new RuntimeException("Failed to convert currency: " + e.getMessage());
         }
 
-        // Step 4: Create Order entity
+        //Create Order entity
         Order order = new Order();
         order.setUser(cart.getUser());
         order.setTotalAmount(totalInr);              // Amount in INR
@@ -109,14 +100,13 @@ public class OrderService {
         }
         order.setOrderItems(orderItems);
 
-        // Save order (order items will be saved due to cascade)
+        // Save order
         Order savedOrder = orderRepository.save(order);
 
-        // Step 5: Clear cart after successful order
+        // Clear cart after successful order
         cart.getCartItems().clear();
         cartRepository.save(cart);
 
-        // Step 6: Prepare response DTO
         OrderResponseDTO responseDTO = new OrderResponseDTO();
         responseDTO.setOrderId(savedOrder.getId());
         responseDTO.setTotalAmount(savedOrder.getTotalAmount());
@@ -140,11 +130,7 @@ public class OrderService {
         return responseDTO;
     }
 
-    /**
-     * Delete an order
-     * @param id - order ID
-     * @throws RuntimeException if order not found
-     */
+    //Delete order, throw exception if order not found
     @Transactional
     public void delete(Long id) {
         if (!orderRepository.existsById(id)) {
@@ -153,13 +139,7 @@ public class OrderService {
         orderRepository.deleteById(id);
     }
 
-    /**
-     * Update order status
-     * @param orderId - order ID
-     * @param newStatus - new order status
-     * @return Updated OrderResponseDTO
-     * @throws RuntimeException if order not found
-     */
+    //Update the order and throw exception if order not found
     @Transactional
     public OrderResponseDTO updateStatus(Long orderId, OrderStatus newStatus) {
         // Find the order
@@ -170,7 +150,6 @@ public class OrderService {
         order.setStatus(newStatus);
         Order updatedOrder = orderRepository.save(order);
 
-        // Prepare response DTO
         OrderResponseDTO responseDTO = new OrderResponseDTO();
         responseDTO.setOrderId(updatedOrder.getId());
         responseDTO.setTotalAmount(updatedOrder.getTotalAmount());
@@ -194,17 +173,12 @@ public class OrderService {
         return responseDTO;
     }
 
-    /**
-     * Get order by ID
-     * @param id - order ID
-     * @return OrderResponseDTO with order details
-     * @throws RuntimeException if order not found
-     */
+    //get order by Id using jpa
     public OrderResponseDTO getOrderById(Long id) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Order not found with id: " + id));
 
-        // Prepare response DTO
+
         OrderResponseDTO responseDTO = new OrderResponseDTO();
         responseDTO.setOrderId(order.getId());
         responseDTO.setTotalAmount(order.getTotalAmount());

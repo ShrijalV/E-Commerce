@@ -2,9 +2,7 @@ package com.shrijal.e_commerce.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 
-/**
- * Data Transfer Object for Category creation/update requests
- */
+
 public class CategoryRequestDTO {
 
     @NotBlank(message = "Category name is required")

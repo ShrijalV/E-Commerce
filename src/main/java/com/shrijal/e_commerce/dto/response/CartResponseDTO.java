@@ -3,10 +3,6 @@ package com.shrijal.e_commerce.dto.response;
 
 import java.util.List;
 
-/**
- * Data Transfer Object for Cart responses
- * Contains cart items and total amount
- */
 public class CartResponseDTO {
 
     private Long cartId;

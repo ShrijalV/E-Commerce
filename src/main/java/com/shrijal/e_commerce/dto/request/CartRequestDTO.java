@@ -4,9 +4,6 @@ package com.shrijal.e_commerce.dto.request;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
-/**
- * Data Transfer Object for adding items to cart
- */
 public class CartRequestDTO {
 
     @NotNull(message = "User id is required")

@@ -1,9 +1,6 @@
 package com.shrijal.e_commerce.dto.response;
 
 
-/**
- * Data Transfer Object for individual order items in responses
- */
 public class OrderItemResponseDTO {
 
     private Long orderItemId;

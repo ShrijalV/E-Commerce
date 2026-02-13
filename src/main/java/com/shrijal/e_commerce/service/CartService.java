@@ -16,10 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Service layer for Cart operations
- * Handles business logic for shopping cart management
- */
 @Service
 public class CartService {
 
@@ -43,7 +39,7 @@ public class CartService {
         Product product = productRepository.findById(dto.getProductId())
                 .orElseThrow(() -> new RuntimeException("Product not found with id: " + dto.getProductId()));
 
-        // Check if product already in cart
+        // Check if product already exists in cart
         boolean productExists = false;
         for (CartItem existingItem : cart.getCartItems()) {
             if (existingItem.getProduct().getId().equals(dto.getProductId())) {
@@ -69,18 +65,12 @@ public class CartService {
         return viewCart(dto.getUserId());
     }
 
-    /**
-     * View cart contents
-     * @param userId - user ID
-     * @return CartResponseDTO with all items and total
-     * @throws RuntimeException if cart not found
-     */
+    //view cart and throw exception if not found
     public CartResponseDTO viewCart(Long userId) {
         // Find user's cart
         Cart cart = cartRepository.findByUserId(userId)
                 .orElseThrow(() -> new RuntimeException("Cart not found for user id: " + userId));
 
-        // Build response DTO
         List<CartItemResponseDTO> itemDTOList = new ArrayList<>();
         double total = 0.0;
 
@@ -104,11 +94,7 @@ public class CartService {
         return response;
     }
 
-    /**
-     * Remove item from cart
-     * @param cartItemId - cart item ID to remove
-     * @throws RuntimeException if cart item not found
-     */
+    //to remove item from cart
     @Transactional
     public void removeItem(Long cartItemId) {
         if (!cartItemRepository.existsById(cartItemId)) {

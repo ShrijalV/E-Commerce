@@ -1,8 +1,6 @@
 package com.shrijal.e_commerce.dto.response;
 
-/**
- * Data Transfer Object for Product responses
- */
+
 public class ProductResponseDTO {
 
     private Long id;

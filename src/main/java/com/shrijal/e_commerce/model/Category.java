@@ -5,10 +5,7 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Category entity representing product categories
- * Maps to 'category' table in the database
- */
+
 @Entity
 public class Category {
 
@@ -17,10 +14,10 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Category name (e.g., "Electronics", "Clothing")
+    // Category name
     private String name;
 
-    // Optional description of the category
+    // description of the category
     private String description;
 
     // One-to-Many relationship: One category can have many products

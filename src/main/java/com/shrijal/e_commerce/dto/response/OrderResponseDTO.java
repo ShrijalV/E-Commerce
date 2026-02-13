@@ -3,16 +3,13 @@ package com.shrijal.e_commerce.dto.response;
 import com.shrijal.e_commerce.model.OrderStatus;
 import java.util.List;
 
-/**
- * Data Transfer Object for Order responses
- * Includes both original amount (INR) and converted amount in target currency
- */
+
 public class OrderResponseDTO {
 
     private Long orderId;
     private Double totalAmount;        // Amount in INR
     private Double convertedAmount;    // Amount in target currency
-    private String currency;           // Target currency code (e.g., USD, EUR)
+    private String currency;           // Target currency code (USD, EUR)
     private OrderStatus status;        // Order status (PENDING, CONFIRMED, etc.)
     private List<OrderItemResponseDTO> items;
 

@@ -13,6 +13,6 @@ public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
     // Used when viewing order details
     List<OrderItem> findByOrderId(Long orderId);
 
-    // Find order items by product id (optional, for analytics)
+    // Find order items by product id
     List<OrderItem> findByProductId(Long productId);
 }
