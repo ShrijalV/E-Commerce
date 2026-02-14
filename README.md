@@ -9,7 +9,7 @@
 **Techs Used**
 - Java
 - Spring Boot
-- JPA for DB
+- JPA
 - MySQL
 - Swagger for API
 - Frankfurther for currency conversion
